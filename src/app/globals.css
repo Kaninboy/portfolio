@@ -1,3 +1,216 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Theme tokens — dark is the default; light overrides via html[data-theme="light"].
+   gl-* = glass fills, ln-* = hairlines, st-* = stripes. */
+:root {
+  color-scheme: dark;
+  --bg: #060608;
+  --fg: #f4f4f6;
+  --fgx: #ffffff;
+  --muted: #a9a9b3;
+  --dim: #8e8e98;
+  --soft: #c9c9d1;
+  --soft2: #d6d6dc;
+  --sh: rgba(0, 0, 0, 0.42);
+  --vig: rgba(6, 6, 8, 0.7);
+  --blend: screen;
+  --gl-002: rgba(255, 255, 255, 0.02);
+  --gl-003: rgba(255, 255, 255, 0.03);
+  --gl-004: rgba(255, 255, 255, 0.04);
+  --gl-005: rgba(255, 255, 255, 0.05);
+  --gl-006: rgba(255, 255, 255, 0.06);
+  --gl-007: rgba(255, 255, 255, 0.07);
+  --gl-008: rgba(255, 255, 255, 0.08);
+  --gl-009: rgba(255, 255, 255, 0.09);
+  --gl-01: rgba(255, 255, 255, 0.1);
+  --gl-016: rgba(255, 255, 255, 0.16);
+  --ln-008: rgba(255, 255, 255, 0.08);
+  --ln-01: rgba(255, 255, 255, 0.1);
+  --ln-012: rgba(255, 255, 255, 0.12);
+  --ln-016: rgba(255, 255, 255, 0.16);
+  --ln-018: rgba(255, 255, 255, 0.18);
+  --ln-02: rgba(255, 255, 255, 0.2);
+  --ln-022: rgba(255, 255, 255, 0.22);
+  --glow: rgba(255, 255, 255, 0.15);
+  /* Navbar pill + sliding indicator */
+  --nav-border: var(--ln-012);
+  --nav-filter: blur(22px) saturate(160%);
+  --nav-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04), 0 12px 40px var(--sh);
+  --ind-bg: linear-gradient(180deg, var(--gl-016), var(--gl-006));
+  --ind-border: var(--ln-016);
+  --ind-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f5f5f7;
+  --fg: #121216;
+  --fgx: #000000;
+  --muted: #55555f;
+  --dim: #686872;
+  --soft: #3a3a44;
+  --soft2: #2a2a33;
+  --sh: rgba(40, 40, 90, 0.12);
+  --vig: rgba(245, 245, 247, 0.55);
+  --blend: normal;
+  --gl-002: rgba(255, 255, 255, 0.3);
+  --gl-003: rgba(255, 255, 255, 0.3);
+  --gl-004: rgba(255, 255, 255, 0.3);
+  --gl-005: rgba(255, 255, 255, 0.3);
+  --gl-006: rgba(255, 255, 255, 0.3);
+  --gl-007: rgba(255, 255, 255, 0.35);
+  --gl-008: rgba(255, 255, 255, 0.4);
+  --gl-009: rgba(255, 255, 255, 0.45);
+  --gl-01: rgba(255, 255, 255, 0.5);
+  --gl-016: rgba(255, 255, 255, 0.8);
+  --ln-008: rgba(20, 20, 45, 0.072);
+  --ln-01: rgba(20, 20, 45, 0.09);
+  --ln-012: rgba(20, 20, 45, 0.108);
+  --ln-016: rgba(20, 20, 45, 0.144);
+  --ln-018: rgba(20, 20, 45, 0.162);
+  --ln-02: rgba(20, 20, 45, 0.18);
+  --ln-022: rgba(20, 20, 45, 0.198);
+  --glow: rgba(40, 40, 90, 0.18);
+  /* Light mode: white hairlines + drop shadows read as glass; dark hairlines read as outlines */
+  --nav-border: rgba(255, 255, 255, 0.7);
+  --nav-filter: blur(22px) saturate(130%);
+  --nav-shadow: 0 0 0 0.5px rgba(20, 20, 45, 0.08),
+    0 1px 2px rgba(20, 20, 45, 0.04), 0 10px 32px rgba(40, 40, 90, 0.1);
+  --ind-bg: linear-gradient(180deg, #ffffff, rgba(255, 255, 255, 0.88));
+  --ind-border: rgba(255, 255, 255, 0.95);
+  --ind-shadow: 0 1px 2px rgba(20, 20, 45, 0.1), 0 3px 10px rgba(20, 20, 45, 0.07);
+}
+
+html {
+  background: var(--bg);
+  transition: background 0.5s ease;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  transition: background 0.5s ease, color 0.5s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(160, 150, 255, 0.35);
+}
+
+/* Aurora background */
+@keyframes au1 {
+  0%, 100% { transform: translate(-10%, -5%) rotate(0deg) scale(1); }
+  50% { transform: translate(8%, 6%) rotate(20deg) scale(1.15); }
+}
+@keyframes au2 {
+  0%, 100% { transform: translate(10%, 0) scale(1.1); }
+  50% { transform: translate(-8%, 10%) scale(0.9); }
+}
+@keyframes au3 {
+  0%, 100% { transform: translate(0, 8%) rotate(0deg); }
+  50% { transform: translate(-12%, -6%) rotate(-25deg); }
+}
+
+@layer components {
+  .aurora-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    mix-blend-mode: var(--blend);
+    will-change: transform;
+  }
+
+  /* Standard glass surface (cards) */
+  .glass {
+    background: linear-gradient(180deg, var(--gl-007), var(--gl-002));
+    border: 1px solid var(--ln-01);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+
+  /* Stronger glass with drop shadow (navbar, contact card) */
+  .glass-strong {
+    background: linear-gradient(180deg, var(--gl-009), var(--gl-003));
+    border: 1px solid var(--ln-012);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    backdrop-filter: blur(22px) saturate(160%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.04), 0 12px 40px var(--sh);
+  }
+
+  /* Floating navbar pill */
+  .glass-nav {
+    background: linear-gradient(180deg, var(--gl-009), var(--gl-003));
+    border: 1px solid var(--nav-border);
+    -webkit-backdrop-filter: var(--nav-filter);
+    backdrop-filter: var(--nav-filter);
+    box-shadow: var(--nav-shadow);
+  }
+
+  /* Sliding highlight under the hovered/active nav link */
+  .nav-indicator {
+    background: var(--ind-bg);
+    border: 1px solid var(--ind-border);
+    box-shadow: var(--ind-shadow);
+    transition: left 0.55s cubic-bezier(0.34, 1.36, 0.5, 1),
+      width 0.55s cubic-bezier(0.34, 1.36, 0.5, 1), opacity 0.3s ease,
+      background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+  }
+
+  /* Secondary glass button */
+  .glass-pill {
+    border: 1px solid var(--ln-016);
+    background: var(--gl-005);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    transition: background 0.3s;
+  }
+  .glass-pill:hover {
+    background: var(--gl-01);
+  }
+
+  /* Primary solid button */
+  .btn-solid {
+    background: var(--fg);
+    color: var(--bg);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .btn-solid:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px var(--glow);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Scroll reveal — only armed when JS runs and motion is allowed (see RevealOnScroll) */
+.reveal-armed [data-reveal] {
+  transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.9s ease;
+}
+.reveal-armed [data-reveal]:not([data-revealed]) {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
