@@ -30,7 +30,7 @@ Career facts live in the sibling repo `claude-note` (Blair's folder). Read from 
 | LinkedIn About (published tone/positioning) | `../claude-note/blair/linkedin-about-draft.md` |
 | Live LinkedIn headline/positions snapshot | `../claude-note/blair/LinkedIn-export-27-sep-2026/Profile.csv`, `Positions.csv` |
 
-Start sessions with `claude --add-dir ../claude-note/blair` so these are readable.
+`../claude-note/blair` is pre-added via `.claude/settings.local.json` (gitignored) — **read-only**: Edit/Write there is denied. Never modify Blair's files from this repo; if a career fact is wrong, tell New to fix it in `claude-note`.
 
 If a fact you need isn't in those files, **ask New** — don't fill the gap.
 
