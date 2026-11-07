@@ -6,6 +6,8 @@ Every design or UI change must pass the [Impeccable audit workflow](docs/design-
 
 ## Getting Started
 
+Use Node.js 26.x. `.nvmrc` records the required major version for compatible Node version managers. The `engines.node` setting in `package.json` also selects Node.js 26.x for Vercel deployments.
+
 First, run the development server:
 
 ```bash
