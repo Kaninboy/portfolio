@@ -37,3 +37,6 @@ next-env.d.ts
 
 # claude code (machine-local)
 .claude/settings.local.json
+
+# impeccable audit evidence (machine-local)
+.impeccable/
