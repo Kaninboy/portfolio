@@ -1,6 +1,12 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Design workflow
+
+Every design or UI change must pass the [Impeccable audit workflow](docs/design-audit-workflow.md) after implementation. Repository agents must follow [AGENTS.md](AGENTS.md); the audit includes rendered checks in both themes, responsive/accessibility checks, the detector, and a saved report.
+
 ## Getting Started
+
+Use Node.js 26.x. `.nvmrc` records the required major version for compatible Node version managers. The `engines.node` setting in `package.json` also selects Node.js 26.x for Vercel deployments.
 
 First, run the development server:
 
