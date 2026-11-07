@@ -27,10 +27,18 @@ export const about = [
 export const contactLine =
   "Happy to connect with people working in system analysis, product development, and applied AI.";
 
+// Exact excerpts used only for visual emphasis; full source sentences stay intact.
+export const aboutEmphasis = [
+  "API specifications, data models, and integration designs",
+  "nine integration services",
+  "500,000–1 million daily transactions",
+];
+
 export type SubProject = {
   name: string;
   period: string;
   bullets: string[];
+  emphasis?: string[];
 };
 
 export type Role = {
@@ -39,6 +47,7 @@ export type Role = {
   period: string;
   location: string;
   bullets?: string[];
+  emphasis?: string[];
   projects?: SubProject[];
 };
 
@@ -52,6 +61,7 @@ export const experience: Role[] = [
       {
         name: "HRMS Replacement — Core HR Data Model & Integration",
         period: "Feb 2026 – Present",
+        emphasis: ["over 130 tables across three schemas", "around 150 integration interfaces across 11 systems"],
         bullets: [
           "System Analyst on a group-wide HRMS replacement serving more than 60,000 employees; own Foundation Objects, Employee Central database design and all integration interfaces",
           "Gathered the as-is data model and integration requirements directly from SAP SuccessFactors administrators and HR domain experts",
@@ -62,6 +72,7 @@ export const experience: Role[] = [
       {
         name: "Luna — MuleSoft Replacement (Custom Backend)",
         period: "Oct 2025 – Apr 2026",
+        emphasis: ["All 9 services live in production, sustaining 500K–1M transactions daily"],
         bullets: [
           "Sole System Analyst on Luna, the custom-backend track of Central's MuleSoft replacement program",
           "Owned 100% of specification and documentation for 9 integration services, built as Nest.js microservices on Azure Kubernetes Service",
@@ -72,6 +83,7 @@ export const experience: Role[] = [
       {
         name: "PMP — Marketplace Adapter Platform",
         period: "Jul 2025 – Oct 2025",
+        emphasis: ["Cut impact analysis and spec design from a day of code-reading to minutes per flow"],
         bullets: [
           "Documented end-to-end architecture for PMP, an adapter platform syncing product, stock, price, promotion and order data across 7 marketplace platforms",
           "Cut impact analysis and spec design from a day of code-reading to minutes per flow, replacing tribal knowledge with a single source of truth",
@@ -85,6 +97,7 @@ export const experience: Role[] = [
     title: "Product Growth Intern (Product Owner and Growth Specialist)",
     period: "Mar 2025 – May 2025",
     location: "Bangkok",
+    emphasis: ["6 comprehensive Mixpanel dashboards", "24 test scenarios for 4 new features"],
     bullets: [
       "Drove feature enhancement by analyzing Mixpanel user behavior, leading to a flow change that increased user access",
       "Built 6 comprehensive Mixpanel dashboards tracking feature engagement, user retention, and monetization metrics",
@@ -95,6 +108,7 @@ export const experience: Role[] = [
   {
     company: "Salary Hero",
     title: "Software QA Engineer Intern",
+    emphasis: ["30+ UAT test cases and conducted 4 UAT sessions", "Refactored 40 Playwright test cases"],
     period: "Sep 2024 – Feb 2025",
     location: "Bangkok",
     bullets: [
@@ -107,6 +121,7 @@ export const experience: Role[] = [
   {
     company: "KPMG Thailand",
     title: "Full Stack Developer Intern — Technology Consulting",
+    emphasis: ["replace Excel-based project assessment tasks"],
     period: "May 2024 – Jul 2024",
     location: "Bangkok",
     bullets: [
@@ -123,6 +138,8 @@ export type Project = {
   roles: string;
   bullets: string[];
   tech: string[];
+  emphasis?: string[];
+  source?: { href: string; label: string; accessibleLabel: string };
 };
 
 export const projects: Project[] = [
@@ -131,6 +148,12 @@ export const projects: Project[] = [
     context: "Senior Project",
     period: "Aug 2024 – May 2025",
     roles: "Backend Developer, LLM Engineer",
+    emphasis: ["auto-generated exam modules for learners and tutors", "question generation pipelines"],
+    source: {
+      href: "https://github.com/noah-platform/noah",
+      label: "View source",
+      accessibleLabel: "View NOAH English source on GitHub (opens in a new tab)",
+    },
     bullets: [
       "Built a GPT-4o-based IELTS platform with auto-generated exam modules for learners and tutors",
       "Developed backend features including user account management and dynamic question bank APIs using Go",
@@ -144,6 +167,12 @@ export const projects: Project[] = [
     context: "University Capstone",
     period: "Jan 2024 – May 2024",
     roles: "Backend Developer, DevOps Engineer",
+    emphasis: ["CI/CD pipeline using GitHub Actions integrated with Docker", "ER diagrams, schema documentation, and data dictionaries"],
+    source: {
+      href: "https://github.com/WhereNext-co/WhereNext-Backend",
+      label: "View source",
+      accessibleLabel: "View WhereNext backend source on GitHub (opens in a new tab)",
+    },
     bullets: [
       "Developed backend system for a schedule management application using Go with Gin and GORM",
       "Deployed the application and MySQL database on a Linux VM using DigitalOcean",
