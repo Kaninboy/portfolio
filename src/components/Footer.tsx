@@ -3,10 +3,10 @@ import { contactLine, hero } from "@/data/profile";
 
 export default function Footer() {
   return (
-    <section id="contact" className="scroll-mt-20 pb-10 pt-20 md:pt-[120px]">
+    <section id="contact" className="scroll-mt-20 pb-10 pt-16">
       <div
         data-reveal
-        className="glass-strong relative overflow-hidden rounded-[36px] px-6 py-12 text-center md:px-16 md:py-[88px]"
+        className="glass-strong relative overflow-hidden rounded-[36px] px-6 py-12 text-center md:px-16 md:py-16"
       >
         <span className="text-[12.5px] uppercase tracking-[0.06em] text-dim">
           06 — Contact
@@ -17,9 +17,9 @@ export default function Footer() {
         <p className="mx-auto mt-6 max-w-[44ch] text-[17px] leading-relaxed text-muted">
           {contactLine}
         </p>
-        <SocialLinks className="mt-10 justify-center" />
+        <SocialLinks className="mt-8 justify-center" />
       </div>
-      <footer className="mt-14 flex flex-wrap justify-between gap-3 border-t border-line-faint pt-6 text-[12.5px] text-dim">
+      <footer className="mt-10 flex flex-wrap justify-between gap-3 border-t border-line-faint pt-6 text-[12.5px] text-dim">
         <span>
           © {new Date().getFullYear()} {hero.name}
         </span>
