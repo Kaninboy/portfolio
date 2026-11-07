@@ -65,3 +65,7 @@ If a fact you need isn't in those files, **ask New** — don't fill the gap.
 - Must stay responsive (mobile-first) and pass `npm run build` + `npm run lint` before calling work done. Check both themes.
 - Don't run `next build` while `next dev` is running (they share `.next`). On Windows, stopping `npm run dev` can orphan the node server on :3000 — find it by port before starting another.
 - Commit only when New says "commit"; split commits by task; push only on "commit and push".
+
+## Mandatory design audit
+
+For every change to appearance, rendered content, or UI behavior, follow [the repository design audit workflow](docs/design-audit-workflow.md) and the mandatory Impeccable audit rules in [AGENTS.md](AGENTS.md). Audit the final implementation before declaring design work complete. A detector-only scan is insufficient.
