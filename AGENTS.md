@@ -6,7 +6,8 @@ Personal portfolio website for **Kanin Sukittivarapunt ("New")**. Public-facing,
 
 - Next.js 14 (App Router) · React 18 · TypeScript · Tailwind CSS 3
 - Icons: `react-icons` (social icons), `@heroicons/react` (theme toggle sun/moon) · no UI component library
-- Commands: `npm run dev` (localhost:3000) · `npm run build` · `npm run lint`
+- Commands: `npm run dev` (localhost:3000) · `npm run build` · `npm run lint` · `npm run og` (regenerates the link-preview card `src/app/opengraph-image.jpg` from `profile.ts` + `public/profile.jpg`; rerun and commit after hero copy or photo changes)
+- SEO: `src/lib/site.ts` holds site URL, title, description and the schema.org `Person` JSON-LD (built from `profile.ts`); `app/sitemap.ts` + `app/robots.ts`. Vercel Web Analytics via `<Analytics />` in `layout.tsx` (only reports once enabled in the Vercel dashboard)
 - Remote: `github.com/Kaninboy/portfolio`
 - Deploy: **Vercel** → live at `https://kaninboy.vercel.app`
 - Resume/CV PDF is hosted on S3 (`kanin-portfolio-website.s3.ap-southeast-1.amazonaws.com/CV_Kanin.pdf`) — not in this repo.
