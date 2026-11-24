@@ -35,17 +35,17 @@ Ported from a Glass Aurora one-page HTML mock (dark glassmorphism). Rules:
 
 ## Content source of truth — never invent career facts
 
-Career facts live in the sibling repo `claude-note` (Blair's folder). Read from there; don't copy stale text from this repo, and don't make up metrics, titles, dates, or project details.
+Career facts live in the sibling repo `claude-note` (its `career/` folder). Read from there; don't copy stale text from this repo, and don't make up metrics, titles, dates, or project details.
 
 | Need | Read |
 |---|---|
-| Work history, education, skills, certs, tenure | `../claude-note/blair/profile.md` |
-| Resume bullets (current, published) | `../claude-note/blair/resume-current.md` |
-| RIS project detail | `../claude-note/blair/projects/` |
-| LinkedIn About (published tone/positioning) | `../claude-note/blair/linkedin-about-draft.md` |
-| Live LinkedIn headline/positions snapshot | `../claude-note/blair/LinkedIn-export-27-sep-2026/Profile.csv`, `Positions.csv` |
+| Work history, education, skills, certs, tenure | `../claude-note/career/profile.md` |
+| Resume bullets (current, published) | `../claude-note/career/resume-current.md` |
+| RIS project detail | `../claude-note/career/projects/` |
+| LinkedIn About (published tone/positioning) | `../claude-note/career/linkedin-about-draft.md` |
+| Live LinkedIn headline/positions snapshot | `../claude-note/career/LinkedIn-export-27-sep-2026/Profile.csv`, `Positions.csv` |
 
-`../claude-note/blair` is pre-added via `.claude/settings.local.json` (gitignored) — **read-only**: Edit/Write there is denied. Never modify Blair's files from this repo; if a career fact is wrong, tell New to fix it in `claude-note`.
+`../claude-note/career` is pre-added via `.claude/settings.local.json` (gitignored) — **read-only**: Edit/Write there is denied. Never modify claude-note files from this repo; if a career fact is wrong, tell New to fix it in `claude-note`.
 
 If a fact you need isn't in those files, **ask New** — don't fill the gap.
 

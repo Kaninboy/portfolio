@@ -1,4 +1,4 @@
-// Site copy. Source of truth: ../claude-note/blair (resume-current.md,
+// Site copy. Source of truth: ../claude-note/career (resume-current.md,
 // linkedin-ris-entry.md, linkedin-about-draft.md, profile.md).
 // Do not add career facts that aren't in those files.
 

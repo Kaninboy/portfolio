@@ -14,9 +14,9 @@ Personal portfolio website for **Kanin Sukittivarapunt ("New")**. Public-facing,
 ## Current state (as of 2026-09-27)
 
 - Single scrolling page, composed in `src/app/page.tsx`: Hero (`#top`) → About `01` → Experience `02` → Projects `03` → Skills `04` → Education & Awards `05` (includes `#certifications`) → Contact `06` (`Footer.tsx`, `#contact`).
-- **All site copy lives in `src/data/profile.ts`** — components only render it. Edit copy there, sourced from `Codex-note` (see below). RIS project bullets are the verbatim published LinkedIn text from `linkedin-ris-entry.md`.
+- **All site copy lives in `src/data/profile.ts`** — components only render it. Edit copy there, sourced from `claude-note` (see below). RIS project bullets are the verbatim published LinkedIn text from `linkedin-ris-entry.md`.
 - Hero content is fixed by New (photo, "Hello!", name + "(New)", tagline, interests line, icons, Resume button) — restyle freely, don't rewrite its content.
-- Contact heading "Let's connect." is site-only copy (not from Codex-note).
+- Contact heading "Let's connect." is site-only copy (not from claude-note).
 
 ## Design system — "Glass Aurora"
 
@@ -35,17 +35,17 @@ Ported from a Glass Aurora one-page HTML mock (dark glassmorphism). Rules:
 
 ## Content source of truth — never invent career facts
 
-Career facts live in the sibling repo `Codex-note` (Blair's folder). Read from there; don't copy stale text from this repo, and don't make up metrics, titles, dates, or project details.
+Career facts live in the sibling repo `claude-note` (its `career/` folder). Read from there; don't copy stale text from this repo, and don't make up metrics, titles, dates, or project details.
 
 | Need | Read |
 |---|---|
-| Work history, education, skills, certs, tenure | `../Codex-note/blair/profile.md` |
-| Resume bullets (current, published) | `../Codex-note/blair/resume-current.md` |
-| RIS project detail | `../Codex-note/blair/projects/` |
-| LinkedIn About (published tone/positioning) | `../Codex-note/blair/linkedin-about-draft.md` |
-| Live LinkedIn headline/positions snapshot | `../Codex-note/blair/LinkedIn-export-27-sep-2026/Profile.csv`, `Positions.csv` |
+| Work history, education, skills, certs, tenure | `../claude-note/career/profile.md` |
+| Resume bullets (current, published) | `../claude-note/career/resume-current.md` |
+| RIS project detail | `../claude-note/career/projects/` |
+| LinkedIn About (published tone/positioning) | `../claude-note/career/linkedin-about-draft.md` |
+| Live LinkedIn headline/positions snapshot | `../claude-note/career/LinkedIn-export-27-sep-2026/Profile.csv`, `Positions.csv` |
 
-`../Codex-note/blair` is pre-added via `.Codex/settings.local.json` (gitignored) — **read-only**: Edit/Write there is denied. Never modify Blair's files from this repo; if a career fact is wrong, tell New to fix it in `Codex-note`.
+`../claude-note/career` is pre-added via `.claude/settings.local.json` (gitignored) — **read-only**: Edit/Write there is denied. Never modify claude-note files from this repo; if a career fact is wrong, tell New to fix it in `claude-note`.
 
 If a fact you need isn't in those files, **ask New** — don't fill the gap.
 
