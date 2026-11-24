@@ -36,6 +36,8 @@ export const aboutEmphasis = [
 
 export type SubProject = {
   name: string;
+  // Tab labels: `label` on wide screens, `short` in the phone segmented control.
+  tab: { label: string; short: string };
   period: string;
   bullets: string[];
   emphasis?: string[];
@@ -60,6 +62,7 @@ export const experience: Role[] = [
     projects: [
       {
         name: "HRMS Replacement — Core HR Data Model & Integration",
+        tab: { label: "HRMS Replacement", short: "HRMS" },
         period: "Feb 2026 – Present",
         emphasis: ["over 130 tables across three schemas", "around 150 integration interfaces across 11 systems"],
         bullets: [
@@ -71,6 +74,7 @@ export const experience: Role[] = [
       },
       {
         name: "Luna — MuleSoft Replacement (Custom Backend)",
+        tab: { label: "Luna — MuleSoft Replacement", short: "Luna" },
         period: "Oct 2025 – Apr 2026",
         emphasis: ["All 9 services live in production, sustaining 500K–1M transactions daily"],
         bullets: [
@@ -82,6 +86,7 @@ export const experience: Role[] = [
       },
       {
         name: "PMP — Marketplace Adapter Platform",
+        tab: { label: "PMP — Marketplace Adapter", short: "PMP" },
         period: "Jul 2025 – Oct 2025",
         emphasis: ["Cut impact analysis and spec design from a day of code-reading to minutes per flow"],
         bullets: [

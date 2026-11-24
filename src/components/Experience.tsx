@@ -1,22 +1,20 @@
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import Bullets from "@/components/Bullets";
+import ProjectTabs from "@/components/ProjectTabs";
 import Section from "@/components/Section";
-import EmphasizedText from "@/components/EmphasizedText";
 import { experience } from "@/data/profile";
 
-function Bullets({ items, emphasis }: { items: string[]; emphasis?: string[] }) {
-  return (
-    <ul className="list-disc space-y-3 pl-5 text-base leading-[1.7] text-muted marker:text-dim">
-      {items.map((b) => (
-        <li key={b}><EmphasizedText text={b} phrases={emphasis} /></li>
-      ))}
-    </ul>
-  );
-}
-
+// Roles with sub-projects get a full card with project tabs; earlier roles are
+// collapsible rows (native <details>, so they work without JS and expand for
+// find-in-page). Every bullet stays in the page.
 export default function Experience() {
+  const featured = experience.filter((role) => role.projects);
+  const earlier = experience.filter((role) => !role.projects);
+
   return (
     <Section id="experience" index="02" title="Experience">
       <div className="flex flex-col gap-6">
-        {experience.map((role) => (
+        {featured.map((role) => (
           <article
             key={role.company}
             data-reveal
@@ -34,34 +32,51 @@ export default function Experience() {
                 <p>{role.location}</p>
               </div>
             </header>
-            <div className="mt-6 max-w-[75ch]">
-
-              {role.bullets && <Bullets items={role.bullets} emphasis={role.emphasis} />}
-
-              {role.projects && (
-                <div className="flex flex-col">
-                  {role.projects.map((project) => (
-                    <div
-                      key={project.name}
-                      className="flex flex-col gap-4 border-t border-line-faint py-7 first:border-t-0 first:pt-0 last:pb-0"
-                    >
-                      <div className="flex flex-col gap-2">
-                        <h4 className="text-lg font-semibold leading-snug tracking-[-0.01em] text-fg">
-                          {project.name}
-                        </h4>
-                        <p className="text-[13px] tabular-nums text-dim">
-                          {project.period}
-                        </p>
-                      </div>
-                      <Bullets items={project.bullets} emphasis={project.emphasis} />
-                    </div>
-                  ))}
-                </div>
-              )}
+            <div className="mt-6">
+              <ProjectTabs projects={role.projects!} label={`${role.company} projects`} />
             </div>
           </article>
         ))}
       </div>
+
+      {earlier.length > 0 && (
+        <div className="mt-10">
+          <h3 data-reveal className="mb-4 text-xs uppercase tracking-[0.06em] text-dim">
+            Earlier roles
+          </h3>
+          <div data-reveal className="glass rounded-[28px] px-5 md:px-8">
+            {earlier.map((role) => (
+              <details
+                key={role.company}
+                className="group border-b border-line-faint last:border-b-0"
+              >
+                <summary className="-mx-2 flex min-h-11 cursor-pointer list-none items-start gap-4 rounded-xl px-2 py-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-fg [&::-webkit-details-marker]:hidden">
+                  <div className="grid min-w-0 flex-1 gap-x-6 gap-y-1 sm:grid-cols-[minmax(0,1fr)_auto]">
+                    <div className="min-w-0">
+                      <h4 className="text-lg font-medium leading-snug tracking-[-0.015em] text-fg">
+                        {role.title}
+                      </h4>
+                      <p className="mt-1 text-[15px] text-soft">{role.company}</p>
+                    </div>
+                    <p className="text-[13px] leading-relaxed tabular-nums text-dim sm:pt-1 sm:text-right">
+                      {role.period}
+                      <span className="sm:hidden"> · </span>
+                      <span className="sm:block">{role.location}</span>
+                    </p>
+                  </div>
+                  <ChevronDownIcon
+                    aria-hidden="true"
+                    className="mt-1 h-5 w-5 shrink-0 text-dim motion-safe:transition-transform motion-safe:duration-300 group-open:rotate-180"
+                  />
+                </summary>
+                <div className="max-w-[75ch] pb-6 sm:pr-9">
+                  {role.bullets && <Bullets items={role.bullets} emphasis={role.emphasis} />}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      )}
     </Section>
   );
 }
