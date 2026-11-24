@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   Bars3Icon,
   MoonIcon,
@@ -18,6 +18,17 @@ const navigation = [
 ];
 
 type Theme = "dark" | "light";
+
+// html[data-theme] (set before paint by layout.tsx) is the source of truth; React
+// only reads it. Server snapshot = dark, matching the default theme.
+const subscribeTheme = (onChange: () => void) => {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, { attributeFilter: ["data-theme"] });
+  return () => observer.disconnect();
+};
+const getTheme = (): Theme =>
+  document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+const getServerTheme = (): Theme => "dark";
 
 // Circular glass button used for the theme toggle and the mobile menu button
 const roundButton =
@@ -68,7 +79,7 @@ export default function Navbar() {
   const [active, setActive] = useState<string | null>(null);
   const [hover, setHover] = useState<string | null>(null);
   const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
-  const [theme, setTheme] = useState<Theme>("dark");
+  const theme = useSyncExternalStore(subscribeTheme, getTheme, getServerTheme);
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -137,21 +148,12 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  useEffect(() => {
-    setTheme(
-      document.documentElement.getAttribute("data-theme") === "light"
-        ? "light"
-        : "dark"
-    );
-  }, []);
-
   const toggleTheme = () => {
     const next: Theme = theme === "light" ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", next);
     try {
       localStorage.setItem("pf-theme", next);
     } catch {}
-    setTheme(next);
   };
 
   return (

@@ -2,9 +2,10 @@
 //   src/app/opengraph-image.jpg + opengraph-image.alt.txt
 // Run `npm run og` after changing the hero copy or profile photo, and commit the output.
 //
-// Why a script and not app/opengraph-image.tsx: Next 14's bundled @vercel/og builds
-// its font/wasm paths with path.join on a file:// URL, which breaks `next build` on
-// Windows. Revisit once the site is on Next 15+.
+// Why a script and not app/opengraph-image.tsx: next/og's ImageResponse only emits
+// PNG, and this card comes out at ~430 KB as PNG versus ~53 KB as JPEG here. Some
+// chat apps drop large preview images, so the smaller JPEG wins. (Tested on Next 16:
+// the route itself builds fine on Windows; Next 14's did not.)
 //
 // Glass Aurora palette: --bg, --fgx, --soft2, --muted, --dim; aurora blobs are sRGB
 // approximations of the oklch values in Aurora.tsx (satori has no oklch or blur).
