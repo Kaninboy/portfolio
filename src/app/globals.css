@@ -42,6 +42,24 @@
   --ind-bg: linear-gradient(180deg, var(--gl-016), var(--gl-006));
   --ind-border: var(--ln-016);
   --ind-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  /* Card glass (.glass), strong glass (.glass-strong), secondary pill (.glass-pill) */
+  --glass-bg: linear-gradient(180deg, var(--gl-007), var(--gl-002));
+  --glass-border: var(--ln-01);
+  --glass-filter: blur(24px);
+  --glass-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  --strong-bg: linear-gradient(180deg, var(--gl-009), var(--gl-003));
+  --strong-border: var(--ln-012);
+  --strong-filter: blur(22px) saturate(160%);
+  --strong-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04), 0 12px 40px var(--sh);
+  --pill-border: var(--ln-016);
+  --pill-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  /* Mobile menu dropdown: the navbar's sheen over a dense dark tint, because it
+     opens over the hero photo (keeps its links >= 4.5:1 over the white shirt) */
+  --menu-bg: linear-gradient(180deg, var(--gl-009), var(--gl-003)),
+    linear-gradient(180deg, rgba(10, 10, 14, 0.86), rgba(10, 10, 14, 0.82));
+  /* Aurora blob alpha multiplier */
+  --au-a: 1;
 }
 
 html[data-theme="light"] {
@@ -54,7 +72,7 @@ html[data-theme="light"] {
   --soft: #3a3a44;
   --soft2: #2a2a33;
   --sh: rgba(40, 40, 90, 0.12);
-  --vig: rgba(245, 245, 247, 0.55);
+  --vig: rgba(245, 245, 247, 0.35);
   --blend: normal;
   --gl-002: rgba(255, 255, 255, 0.3);
   --gl-003: rgba(255, 255, 255, 0.3);
@@ -76,12 +94,33 @@ html[data-theme="light"] {
   --glow: rgba(40, 40, 90, 0.18);
   /* Light mode: white hairlines + drop shadows read as glass; dark hairlines read as outlines */
   --nav-border: rgba(255, 255, 255, 0.7);
-  --nav-filter: blur(22px) saturate(130%);
+  --nav-filter: blur(22px) saturate(150%);
   --nav-shadow: 0 0 0 0.5px rgba(20, 20, 45, 0.08),
     0 1px 2px rgba(20, 20, 45, 0.04), 0 10px 32px rgba(40, 40, 90, 0.1);
   --ind-bg: linear-gradient(180deg, #ffffff, rgba(255, 255, 255, 0.88));
   --ind-border: rgba(255, 255, 255, 0.95);
   --ind-shadow: 0 1px 2px rgba(20, 20, 45, 0.1), 0 3px 10px rgba(20, 20, 45, 0.07);
+  /* Light glass: a brighter top-to-bottom sheen, white specular edges and a soft
+     lift shadow, so cards separate from the pale page the way dark cards do */
+  --glass-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.42));
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --glass-filter: blur(24px) saturate(150%);
+  --glass-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.3), 0 0 0 0.5px rgba(20, 20, 45, 0.06),
+    0 1px 2px rgba(20, 20, 45, 0.04), 0 12px 36px rgba(40, 40, 90, 0.08);
+  --strong-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.45));
+  --strong-border: rgba(255, 255, 255, 0.75);
+  --strong-filter: blur(22px) saturate(150%);
+  --strong-shadow: inset 0 1px 0 #ffffff, inset 0 -1px 0 rgba(255, 255, 255, 0.35),
+    0 0 0 0.5px rgba(20, 20, 45, 0.07), 0 2px 4px rgba(20, 20, 45, 0.04),
+    0 16px 44px rgba(40, 40, 90, 0.11);
+  --pill-border: rgba(255, 255, 255, 0.75);
+  --pill-shadow: inset 0 1px 0 #ffffff, 0 0 0 0.5px rgba(20, 20, 45, 0.08),
+    0 1px 3px rgba(20, 20, 45, 0.08);
+  /* The dropdown opens over the hero photo: a denser fill keeps its links >= 4.5:1 */
+  --menu-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.78));
+  /* Stronger blobs + lighter vignette: glass needs color behind it to blur */
+  --au-a: 1.3;
 }
 
 html {
@@ -125,21 +164,20 @@ body {
 
   /* Standard glass surface (cards) */
   .glass {
-    background: linear-gradient(180deg, var(--gl-007), var(--gl-002));
-    border: 1px solid var(--ln-01);
-    -webkit-backdrop-filter: blur(24px);
-    backdrop-filter: blur(24px);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    -webkit-backdrop-filter: var(--glass-filter);
+    backdrop-filter: var(--glass-filter);
+    box-shadow: var(--glass-shadow);
   }
 
-  /* Stronger glass with drop shadow (navbar, contact card) */
+  /* Stronger glass with drop shadow (contact card) */
   .glass-strong {
-    background: linear-gradient(180deg, var(--gl-009), var(--gl-003));
-    border: 1px solid var(--ln-012);
-    -webkit-backdrop-filter: blur(22px) saturate(160%);
-    backdrop-filter: blur(22px) saturate(160%);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.04), 0 12px 40px var(--sh);
+    background: var(--strong-bg);
+    border: 1px solid var(--strong-border);
+    -webkit-backdrop-filter: var(--strong-filter);
+    backdrop-filter: var(--strong-filter);
+    box-shadow: var(--strong-shadow);
   }
 
   /* Floating navbar pill */
@@ -149,6 +187,11 @@ body {
     -webkit-backdrop-filter: var(--nav-filter);
     backdrop-filter: var(--nav-filter);
     box-shadow: var(--nav-shadow);
+  }
+
+  /* Mobile menu dropdown: .glass-nav with its own fill */
+  .glass-menu {
+    background: var(--menu-bg);
   }
 
   /* Sliding highlight under the hovered/active nav link */
@@ -163,11 +206,11 @@ body {
 
   /* Secondary glass button */
   .glass-pill {
-    border: 1px solid var(--ln-016);
+    border: 1px solid var(--pill-border);
     background: var(--gl-005);
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    box-shadow: var(--pill-shadow);
     transition: background 0.3s;
   }
   .glass-pill:hover {
