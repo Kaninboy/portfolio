@@ -1,10 +1,11 @@
 // Fixed animated aurora behind the page (Glass Aurora design, intensity = 1).
+// Blob alpha scales by --au-a (globals.css): 1 in dark, boosted in light.
 const INTENSITY = 1;
 
 const blobs = [
   {
     background:
-      "radial-gradient(closest-side, oklch(0.6 0.16 262 / 0.55), transparent)",
+      "radial-gradient(closest-side, oklch(0.6 0.16 262 / calc(0.55 * var(--au-a, 1))), transparent)",
     width: "70vw",
     height: "45vw",
     top: "-18vw",
@@ -13,7 +14,7 @@ const blobs = [
   },
   {
     background:
-      "radial-gradient(closest-side, oklch(0.58 0.16 300 / 0.5), transparent)",
+      "radial-gradient(closest-side, oklch(0.58 0.16 300 / calc(0.5 * var(--au-a, 1))), transparent)",
     width: "60vw",
     height: "40vw",
     top: "-8vw",
@@ -22,7 +23,7 @@ const blobs = [
   },
   {
     background:
-      "radial-gradient(closest-side, oklch(0.6 0.14 280 / 0.35), transparent)",
+      "radial-gradient(closest-side, oklch(0.6 0.14 280 / calc(0.35 * var(--au-a, 1))), transparent)",
     width: "55vw",
     height: "35vw",
     top: "55vh",
