@@ -230,14 +230,26 @@ export const awards: { name: string; detail: string; date: string }[] = [
   { name: "Finalist — InnoFunding & InnoCrowding x NITAD18", detail: "AI+IT factory infrastructure pitch", date: "Mar 2022" },
 ];
 
-export const certifications: { name: string; issuer: string; date: string }[] = [
-  { name: "Microsoft Certified: Azure Data Fundamentals (DP-900)", issuer: "Microsoft", date: "Jun 2024" },
-  { name: "Claude 101", issuer: "Anthropic", date: "Mar 2026" },
-  { name: "Design and Develop a Website using Figma and CSS", issuer: "Coursera", date: "Aug 2024" },
-  { name: "Create a Digital Wireframe with Figma", issuer: "Coursera", date: "Aug 2024" },
-  { name: "Developing Innovative Ideas for New Companies", issuer: "University of Maryland / Coursera", date: "Apr 2024" },
-  { name: "Excel Basics for Data Analysis", issuer: "IBM / Coursera", date: "Feb 2024" },
-  { name: "Introduction to Data Analytics", issuer: "IBM / Coursera", date: "Jan 2024" },
-  { name: "Introduction to Agile Development and Scrum", issuer: "IBM / Coursera", date: "Jan 2024" },
-  { name: "Intro to Data Analytics and Big Data", issuer: "Chulalongkorn University", date: "Jun 2022" },
+export type Certification = {
+  name: string;
+  issuer: string;
+  date: string;
+  // Web copy built by `npm run certs` from assets/certificates.
+  image: string;
+  // Credential link from the LinkedIn export (Certifications.csv).
+  url?: string;
+  // Earned by passing a certification exam: shown as a featured card.
+  exam?: boolean;
+};
+
+export const certifications: Certification[] = [
+  { name: "Microsoft Certified: Azure Data Fundamentals (DP-900)", issuer: "Microsoft", date: "Jun 2024", image: "/certificates/microsoft-dp900.webp", exam: true, url: "https://learn.microsoft.com/en-us/users/kanin-suk/credentials/5be0fad3d275b0ff" },
+  { name: "Claude 101", issuer: "Anthropic", date: "Mar 2026", image: "/certificates/anthropic-claude-101.webp", url: "https://verify.skilljar.com/c/pue235tivf7z" },
+  { name: "Design and Develop a Website using Figma and CSS", issuer: "Coursera", date: "Aug 2024", image: "/certificates/coursera-figma-css-website.webp", url: "https://www.coursera.org/account/accomplishments/records/H6TJACL7ZZA7" },
+  { name: "Create a Digital Wireframe with Figma", issuer: "Coursera", date: "Aug 2024", image: "/certificates/coursera-figma-wireframe.webp", url: "https://www.coursera.org/account/accomplishments/records/FL24PHHJWHCI" },
+  { name: "Developing Innovative Ideas for New Companies", issuer: "University of Maryland / Coursera", date: "Apr 2024", image: "/certificates/umd-innovative-ideas.webp", url: "https://www.coursera.org/account/accomplishments/records/2E4XX5F6UDJ5" },
+  { name: "Excel Basics for Data Analysis", issuer: "IBM / Coursera", date: "Feb 2024", image: "/certificates/ibm-excel-basics.webp", url: "https://www.coursera.org/account/accomplishments/records/7ECZ2BPAP5F6" },
+  { name: "Introduction to Data Analytics", issuer: "IBM / Coursera", date: "Jan 2024", image: "/certificates/ibm-intro-data-analytics.webp", url: "https://www.coursera.org/account/accomplishments/records/9GWZNR95TNT9" },
+  { name: "Introduction to Agile Development and Scrum", issuer: "IBM / Coursera", date: "Jan 2024", image: "/certificates/ibm-agile-scrum.webp", url: "https://www.coursera.org/account/accomplishments/records/HZP33TRKQ4CG" },
+  { name: "Intro to Data Analytics and Big Data", issuer: "Chulalongkorn University", date: "Jun 2022", image: "/certificates/chula-intro-data-analytics-big-data.webp" },
 ];

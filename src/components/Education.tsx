@@ -1,3 +1,4 @@
+import Certifications from "@/components/Certifications";
 import Section from "@/components/Section";
 import { awards, certifications, education } from "@/data/profile";
 
@@ -74,11 +75,17 @@ export default function Education() {
           title="Honors & Awards"
           rows={awards.map((a) => ({ name: a.name, meta: a.detail, date: a.date }))}
         />
-        <RowList
-          id="certifications"
-          title="Certifications"
-          rows={certifications.map((c) => ({ name: c.name, meta: c.issuer, date: c.date }))}
-        />
+        <div id="certifications" className="scroll-mt-20">
+          <h3
+            data-reveal
+            className="mb-4 text-xs uppercase tracking-[0.06em] text-dim"
+          >
+            Certifications
+          </h3>
+          <div data-reveal>
+            <Certifications items={certifications} />
+          </div>
+        </div>
       </div>
     </Section>
   );

@@ -40,3 +40,7 @@ next-env.d.ts
 
 # impeccable audit evidence (machine-local)
 .impeccable/
+
+# certificate originals (machine-local): may hold personal IDs; `npm run certs`
+# publishes redacted copies to public/certificates
+assets/
