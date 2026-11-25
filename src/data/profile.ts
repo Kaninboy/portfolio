@@ -238,10 +238,12 @@ export type Certification = {
   image: string;
   // Credential link from the LinkedIn export (Certifications.csv).
   url?: string;
+  // Earned by passing a certification exam: shown as a featured card.
+  exam?: boolean;
 };
 
 export const certifications: Certification[] = [
-  { name: "Microsoft Certified: Azure Data Fundamentals (DP-900)", issuer: "Microsoft", date: "Jun 2024", image: "/certificates/microsoft-dp900.webp", url: "https://learn.microsoft.com/en-us/users/kanin-suk/credentials/5be0fad3d275b0ff" },
+  { name: "Microsoft Certified: Azure Data Fundamentals (DP-900)", issuer: "Microsoft", date: "Jun 2024", image: "/certificates/microsoft-dp900.webp", exam: true, url: "https://learn.microsoft.com/en-us/users/kanin-suk/credentials/5be0fad3d275b0ff" },
   { name: "Claude 101", issuer: "Anthropic", date: "Mar 2026", image: "/certificates/anthropic-claude-101.webp", url: "https://verify.skilljar.com/c/pue235tivf7z" },
   { name: "Design and Develop a Website using Figma and CSS", issuer: "Coursera", date: "Aug 2024", image: "/certificates/coursera-figma-css-website.webp", url: "https://www.coursera.org/account/accomplishments/records/H6TJACL7ZZA7" },
   { name: "Create a Digital Wireframe with Figma", issuer: "Coursera", date: "Aug 2024", image: "/certificates/coursera-figma-wireframe.webp", url: "https://www.coursera.org/account/accomplishments/records/FL24PHHJWHCI" },

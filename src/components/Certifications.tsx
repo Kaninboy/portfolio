@@ -4,20 +4,43 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowUpRightIcon,
+  CheckBadgeIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import type { Certification } from "@/data/profile";
 
-// Certificates as a carousel at every size: a native scroll-snap row (swipe,
+const focusRing =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fg";
+
+function VerifyLink({ cert, className = "" }: { cert: Certification; className?: string }) {
+  if (!cert.url) return null;
+  return (
+    <a
+      href={cert.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Verify ${cert.name} on the issuer's site (opens in a new tab)`}
+      className={`glass-pill inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium text-fg ${focusRing} ${className}`}
+    >
+      Verify
+      <ArrowUpRightIcon aria-hidden="true" className="h-4 w-4" />
+    </a>
+  );
+}
+
+// Exam-based certifications (`exam: true`) get a featured card above the rest.
+// The rest form a carousel at every size: a native scroll-snap row (swipe,
 // trackpad or the prev/next buttons). One card plus a peek on phones, two on
 // tablets, three from lg. Tapping a card opens the full certificate in a native
 // <dialog>, which handles focus, Esc and returning focus to the card.
-export default function Certifications({ items }: { items: Certification[] }) {
+export default function Certifications({ items: all }: { items: Certification[] }) {
+  const featured = all.filter((cert) => cert.exam);
+  const items = all.filter((cert) => !cert.exam);
   const row = useRef<HTMLUListElement>(null);
   const dialog = useRef<HTMLDialogElement>(null);
-  // First fully visible card and how many fit, for the "1–3 / 9" counter.
+  // First fully visible card and how many fit, for the "1–3 / 8" counter.
   const [view, setView] = useState({ first: 0, count: 1 });
   const [open, setOpen] = useState<Certification | null>(null);
 
@@ -63,6 +86,42 @@ export default function Certifications({ items }: { items: Certification[] }) {
 
   return (
     <>
+      {featured.map((cert) => (
+        <article
+          key={cert.name}
+          className="glass mb-6 grid min-w-0 gap-5 rounded-3xl p-3 sm:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] sm:items-center sm:gap-6 md:gap-8 md:p-4"
+        >
+          <button
+            type="button"
+            aria-haspopup="dialog"
+            aria-label={`View certificate: ${cert.name}`}
+            onClick={() => show(cert)}
+            className={`group relative block aspect-[16/9] w-full overflow-hidden rounded-2xl bg-glass-btn ${focusRing}`}
+          >
+            <Image
+              src={cert.image}
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 560px, (min-width: 640px) 52vw, 92vw"
+              className="object-contain p-2 motion-safe:transition-transform motion-safe:duration-500 group-hover:scale-[1.02]"
+            />
+          </button>
+          <div className="flex min-w-0 flex-col items-start gap-3 px-3 pb-3 sm:px-0 sm:pb-0 sm:pr-3 md:pr-4">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-line-strong bg-glass-hover px-3 py-1 text-[12.5px] font-medium text-fg">
+              <CheckBadgeIcon aria-hidden="true" className="h-4 w-4" />
+              Certification exam
+            </span>
+            <h4 className="text-xl font-medium md:text-[22px] leading-snug tracking-[-0.02em] text-fg">
+              {cert.name}
+            </h4>
+            <p className="text-[13px] text-dim">
+              {cert.issuer} · <span className="tabular-nums">{cert.date}</span>
+            </p>
+            <VerifyLink cert={cert} className="mt-2" />
+          </div>
+        </article>
+      ))}
+
       <ul
         ref={row}
         onScroll={update}
@@ -154,18 +213,7 @@ export default function Certifications({ items }: { items: Certification[] }) {
                 </p>
               </div>
               <div className="flex shrink-0 items-center gap-3">
-                {open.url && (
-                  <a
-                    href={open.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Verify ${open.name} on the issuer's site (opens in a new tab)`}
-                    className="glass-pill inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium text-fg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fg"
-                  >
-                    Verify
-                    <ArrowUpRightIcon aria-hidden="true" className="h-4 w-4" />
-                  </a>
-                )}
+                <VerifyLink cert={open} />
                 <button
                   type="button"
                   autoFocus
