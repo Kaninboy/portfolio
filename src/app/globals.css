@@ -54,6 +54,10 @@
     inset 0 -1px 0 rgba(255, 255, 255, 0.04), 0 12px 40px var(--sh);
   --pill-border: var(--ln-016);
   --pill-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  /* Mobile menu dropdown: the navbar's sheen over a dense dark tint, because it
+     opens over the hero photo (keeps its links >= 4.5:1 over the white shirt) */
+  --menu-bg: linear-gradient(180deg, var(--gl-009), var(--gl-003)),
+    linear-gradient(180deg, rgba(10, 10, 14, 0.86), rgba(10, 10, 14, 0.82));
   /* Aurora blob alpha multiplier */
   --au-a: 1;
 }
@@ -113,6 +117,8 @@ html[data-theme="light"] {
   --pill-border: rgba(255, 255, 255, 0.75);
   --pill-shadow: inset 0 1px 0 #ffffff, 0 0 0 0.5px rgba(20, 20, 45, 0.08),
     0 1px 3px rgba(20, 20, 45, 0.08);
+  /* The dropdown opens over the hero photo: a denser fill keeps its links >= 4.5:1 */
+  --menu-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.78));
   /* Stronger blobs + lighter vignette: glass needs color behind it to blur */
   --au-a: 1.3;
 }
@@ -181,6 +187,11 @@ body {
     -webkit-backdrop-filter: var(--nav-filter);
     backdrop-filter: var(--nav-filter);
     box-shadow: var(--nav-shadow);
+  }
+
+  /* Mobile menu dropdown: .glass-nav with its own fill */
+  .glass-menu {
+    background: var(--menu-bg);
   }
 
   /* Sliding highlight under the hovered/active nav link */

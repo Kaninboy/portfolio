@@ -242,7 +242,7 @@ export default function Navbar() {
         <nav
           id="mobile-menu"
           aria-label="Sections"
-          className={`glass-nav absolute inset-x-0 top-full mt-2 origin-top rounded-[24px] p-2 transition-[opacity,transform,visibility] duration-300 ease-[cubic-bezier(.2,.8,.2,1)] ${
+          className={`glass-nav glass-menu absolute inset-x-0 top-full mt-2 origin-top rounded-[24px] p-2 transition-[opacity,transform,visibility] duration-300 ease-[cubic-bezier(.2,.8,.2,1)] ${
             menuOpen
               ? "visible translate-y-0 scale-100 opacity-100"
               : "invisible -translate-y-2 scale-[0.98] opacity-0"
